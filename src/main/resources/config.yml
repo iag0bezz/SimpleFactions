@@ -1,0 +1,120 @@
+mysql:
+  host: 'localhost'
+  username: 'root'
+  password: ''
+  port: 3306
+  database: 'database'
+scoreboard:
+  enabled: true
+  title: "&2&lSIMPLE FACTIONS"
+  lines:
+    with_faction:
+      - '&0'
+      - '&7Faction: &e%factions_tag%'
+      - '  &7Online: &a%factions_players_online%&7/%factions_players%'
+      - '  &7Claims: &a%factions_chunks%'
+      - '&1'
+      - '&7Role: &e%factions_rank%'
+      - '&2'
+      - '&7store.simplefactions.com'
+    without_faction:
+      - '&0'
+      - '&cNo have faction :('
+      - '&1'
+      - '&7store.simplefactions.com'
+messages:
+  help:
+    - ''
+    - '&2&lSimpleFactions &7See all commands:'
+    - ''
+    - '&7/f create [tag] [name] &eCreate new faction'
+    - '&7/f who &eSee your faction details'
+    - '&7/f tag [tag] &eChange faction tag'
+    - '&7/f join &eAccept faction invite'
+    - '&7/f claim &eClaim terrain'
+    - '&7/f list &eSee all factions'
+    - '&7/f invite [player] &eInvite player to factions'
+    - '&7/f perm &eChange roles permissions'
+    - '&7/f fly &eEnable flight within the faction base'
+    - '&7/f kick [player] &eKick player from faction'
+    - '&7/f disband &eDisband your faction'
+    - '&7/f sethome &eDefine faction base'
+    - '&7/f home &eTeleport to faction base'
+  invalid_subcommand: "&cCan't find this sub command."
+  no_permission: "&cYou don't have permission to execute that."
+  inventory:
+    manager:
+      maximum_rank: "&cThere is no rank above this"
+      minimum_rank: "&cThere is no rank below this"
+  commands:
+    create:
+      provide_arguments: "&cYou need to provide a faction name and tag"
+      already_have_faction: "&cYou already have a faction."
+      tag_already_used: "&cThere is already another faction with this tag in use"
+      name_already_used: "&cThere is already another faction with this name in use"
+      created: "&aSuccessfully create faction."
+    who:
+      no_have_faction: '&cYou do not have a faction to view information'
+      info:
+        - '&7---------------------------------'
+        - '&7Faction Name: &e%factions_name%'
+        - '&7Faction Tag: &e%factions_tag%'
+        - '&7Members online: &a%factions_players_online%&7/%factions_players%'
+        - '&7Total chunks: &e%factions_chunks%'
+        - '&7Base: &e%factions_base%'
+        - ''
+        - '&7Your rank: &a%factions_rank%'
+        - '&7---------------------------------'
+    claim:
+      no_have_faction: '&cYou do not have a faction to view information'
+      already_claimed: "&cThis land has already been claimed by the &e%faction% &cfaction"
+      claimed: "&aSuccessfully claimed chunk &e%chunk%"
+    tag:
+      provide_arguments: "&cYou need to provide a faction tag"
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&cYou need to be a leader or superior to perform this"
+      tag_already_used: "&cThere is already another faction with this tag in use"
+      changed: "&aTag successfully changed to &e%tag%"
+    perm:
+      provide_arguments: "&cYou need to provide a faction rank name"
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&cYou need to be a leader or superior to perform this"
+      invalid_rank: "&cThis rank could not be found"
+    join:
+      provide_arguments: "&cYou need to provide a faction tag"
+      already_have_faction: "&cYou already have a faction."
+      no_invite: "&cYou have not received invitations to this faction"
+      accepted: "&aYou have accepted the request to join the &e%faction% &afaction"
+    invite:
+      provide_arguments: "&cYou need to provide a player name"
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_permission: "&cYou need to have permission to invite players to your faction"
+      target_offline: "&cThe informed player is offline or does not exist"
+      invalid_session: "&cThis player's session could not be found, please try again."
+      already_have_invited: "&cYour faction has already invited this player."
+      invited: "&aYou have invited the &e%target% &aplayer to your faction"
+      invited_other: "&aYou have been invited to join the &e%faction% &afaction"
+    kick:
+      provide_arguments: "&cYou need to provide a faction rank name"
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&ccYou need to have permission to kick players of your faction"
+      target_offline: "&cThe informed player is offline or does not exist"
+      invalid_session: "&cThis player's session could not be found, please try again."
+      invalid_target: "&cThis player is not part of your faction"
+      invalid_kick_superior: "&cYou cannot expel someone equal or superior to your role"
+      kicked: "&aYou kicked the &e%target% &aplayer from the faction"
+    sethome:
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&ccYou need to have permission to set base of your faction"
+      modified: "&aSuccessfully modified faction base to &e%location%"
+    home:
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_home: "&cFaction base location is not defined."
+      teleported: "&aSuccessfully teleported to faction base"
+    disband:
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&cYou need to be a leader or superior to perform this"
+      disbanded: "&aSuccessfully disbanded faction &e%faction%"
+    manager:
+      no_have_faction: '&cYou do not have a faction to view information'
+      no_have_permission: "&cYou need to be a leader or superior to perform this"

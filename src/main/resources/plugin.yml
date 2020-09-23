@@ -1,0 +1,12 @@
+name: SimpleFactions
+version: 1.0
+main: com.frach.minecraft.factions.Factions
+api-version: 1.13
+prefix: SimpleFactions
+authors: [ FrachDev_ ]
+softdepend: [PlaceholderAPI]
+description: Simple complete factions plugin for Senior Team development+ application
+commands:
+  faction:
+    description: Main factions command
+    aliases: [f, fac]
