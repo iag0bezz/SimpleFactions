@@ -1,16 +1,15 @@
 package com.frach.minecraft.factions.task;
 
 import com.frach.minecraft.factions.Factions;
-import com.frach.minecraft.factions.data.Faction;
 import com.frach.minecraft.factions.data.FactionPlayer;
 import com.frach.minecraft.factions.helper.ConfigurationHelper;
-import com.frach.minecraft.factions.util.ScoreboardBuilder;
+import com.frach.minecraft.factions.util.Board;
+import com.google.common.collect.Lists;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FactionScoreboardTask extends BukkitRunnable {
 
@@ -23,29 +22,30 @@ public class FactionScoreboardTask extends BukkitRunnable {
 
             boolean placeholder = Factions.getInstance().getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
 
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                FactionPlayer factionPlayer = Factions.getInstance().getFactionPlayerController().find(player.getUniqueId()).orElse(null);
+            List<Board> boards = Factions.getInstance().getBoardController().stream().collect(Collectors.toList());
+
+            for (Board board : boards) {
+                FactionPlayer factionPlayer = Factions.getInstance().getFactionPlayerController().find(board.getReceiver().getUniqueId()).orElse(null);
 
                 if(factionPlayer == null)
                     continue;
 
+                board.setLines(Lists.newArrayList());
+                board.setTitle(title);
+
                 List<String> lines = factionPlayer.getFaction() == null ? configuration.getStringList("scoreboard.lines.without_faction") : configuration.getStringList("scoreboard.lines.with_faction");
-
-                ScoreboardBuilder scoreboardBuilder = new ScoreboardBuilder(player);
-
-                scoreboardBuilder.setTitle(title);
 
                 for (int i = 0; i < lines.size(); i++) {
                     String line = lines.get(i);
 
                     if(placeholder) {
-                        line = PlaceholderAPI.setPlaceholders(player, line);
+                        line = PlaceholderAPI.setPlaceholders(board.getReceiver(), line);
                     }
 
-                    scoreboardBuilder.setLine(line, lines.size() - i);
+                    board.addLine(line);
                 }
 
-                scoreboardBuilder.build();
+                board.update();
             }
         }
     }

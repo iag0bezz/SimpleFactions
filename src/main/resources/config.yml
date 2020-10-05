@@ -90,6 +90,7 @@ messages:
       no_have_faction: '&cYou do not have a faction to view information'
       no_permission: "&cYou need to have permission to invite players to your faction"
       target_offline: "&cThe informed player is offline or does not exist"
+      yourself: "&cYou cannot invite yourself"
       invalid_session: "&cThis player's session could not be found, please try again."
       already_have_invited: "&cYour faction has already invited this player."
       invited: "&aYou have invited the &e%target% &aplayer to your faction"
@@ -99,6 +100,7 @@ messages:
       no_have_faction: '&cYou do not have a faction to view information'
       no_have_permission: "&ccYou need to have permission to kick players of your faction"
       target_offline: "&cThe informed player is offline or does not exist"
+      yourselft: "&cYou cannot kick yourself"
       invalid_session: "&cThis player's session could not be found, please try again."
       invalid_target: "&cThis player is not part of your faction"
       invalid_kick_superior: "&cYou cannot expel someone equal or superior to your role"

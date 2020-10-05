@@ -44,7 +44,7 @@ public class DisbandSubCommand implements SubCommand<Player> {
         }
 
         sender.sendMessage(this.getMessage("disbanded", new HashMap<String, String>() {{
-            put("%faction%", factionPlayer.getFaction().getName());
+            put("%faction%", faction.getName());
         }}));
 
         Factions.getInstance().getFactionController().delete(faction);

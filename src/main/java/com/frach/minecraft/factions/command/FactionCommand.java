@@ -7,6 +7,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class FactionCommand implements CommandExecutor, TabCompleter {
@@ -44,7 +45,9 @@ public class FactionCommand implements CommandExecutor, TabCompleter {
         List<String> completions = Lists.newArrayList();
 
         if(args.length == 1) {
-            return this.factions.getSubCommandManager().getCommandsName();
+            if(args[0].isEmpty()) {
+                return this.factions.getSubCommandManager().getCommandsName();
+            } else return this.factions.getSubCommandManager().getCommandsName().stream().filter(data -> data.toLowerCase().startsWith(args[0])).collect(Collectors.toList());
         } else if (args.length > 1) {
             SubCommand subCommand = this.factions.getSubCommandManager().find(args[0]);
 

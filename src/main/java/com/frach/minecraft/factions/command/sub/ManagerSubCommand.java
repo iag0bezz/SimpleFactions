@@ -3,8 +3,6 @@ package com.frach.minecraft.factions.command.sub;
 import com.frach.minecraft.factions.Factions;
 import com.frach.minecraft.factions.command.SubCommand;
 import com.frach.minecraft.factions.data.FactionPlayer;
-import com.frach.minecraft.factions.data.FactionRank;
-import com.frach.minecraft.factions.inventory.PermissionInventory;
 import com.frach.minecraft.factions.inventory.RankInventory;
 import org.bukkit.entity.Player;
 

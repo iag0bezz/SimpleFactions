@@ -29,7 +29,7 @@ public class SetHomeSubCommand implements SubCommand<Player> {
             return;
         }
 
-        if(!factionPlayer.getRank().isKick()) {
+        if(!factionPlayer.getRank().isSetHome()) {
             sender.sendMessage(this.getMessage("no_have_permission"));
             return;
         }

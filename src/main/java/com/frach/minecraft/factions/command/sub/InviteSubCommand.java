@@ -49,6 +49,11 @@ public class InviteSubCommand implements SubCommand<Player> {
             return;
         }
 
+        if(target == sender) {
+            sender.sendMessage(this.getMessage("yourself"));
+            return;
+        }
+
         FactionPlayer targetFP = Factions.getInstance().getFactionPlayerController().find(target.getUniqueId()).orElse(null);
 
         if(targetFP == null) {

@@ -24,12 +24,19 @@ public class PlayerListener implements Listener {
         if(factionPlayer == null) {
             this.factionPlayerController.create(new FactionPlayer(player.getUniqueId()));
         }
+
+        Factions.getInstance().getServer().getScheduler().runTaskLater(Factions.getInstance(), () -> {
+            if(player.isOnline()) {
+                Factions.getInstance().getBoardController().create(player);
+            }
+        }, 2L);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
+        Factions.getInstance().getBoardController().remove(player);
         this.factionPlayerController.find(player.getUniqueId()).ifPresent(Factions.getInstance().getFactionPlayerService()::save);
     }
 

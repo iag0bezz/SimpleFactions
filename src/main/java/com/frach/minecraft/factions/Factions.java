@@ -5,8 +5,10 @@ import com.frach.minecraft.factions.adapter.FactionAdapter;
 import com.frach.minecraft.factions.adapter.LocationAdapter;
 import com.frach.minecraft.factions.command.FactionCommand;
 import com.frach.minecraft.factions.command.SubCommandManager;
+import com.frach.minecraft.factions.controller.BoardController;
 import com.frach.minecraft.factions.controller.FactionController;
 import com.frach.minecraft.factions.controller.FactionPlayerController;
+import com.frach.minecraft.factions.controller.impl.BoardControllerImpl;
 import com.frach.minecraft.factions.controller.impl.FactionControllerImpl;
 import com.frach.minecraft.factions.controller.impl.FactionPlayerControllerImpl;
 import com.frach.minecraft.factions.data.Faction;
@@ -46,6 +48,7 @@ public final class Factions extends PluginHelper {
 
     private FactionController factionController;
     private FactionPlayerController factionPlayerController;
+    private BoardController boardController;
 
     private ConfigurationHelper configuration;
     private SubCommandManager subCommandManager;
@@ -64,6 +67,7 @@ public final class Factions extends PluginHelper {
     public void enable() {
         this.factionController = new FactionControllerImpl();
         this.factionPlayerController = new FactionPlayerControllerImpl();
+        this.boardController = new BoardControllerImpl();
 
         if(this.getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             this.getLog().info("Successfully hooked into PlaceholderAPI");
@@ -75,6 +79,8 @@ public final class Factions extends PluginHelper {
             this.getLog().info("Successfully loaded all factions.");
             this.factionPlayerController.constructor(this).thenAcceptAsync(unused1 -> {
                 this.getLog().info("Successfully loaded all players.");
+
+                this.boardController.constructor(this);
 
                 this.subCommandManager = new SubCommandManager();
 
@@ -93,6 +99,7 @@ public final class Factions extends PluginHelper {
     public void disable() {
         this.factionController.destructor(this);
         this.factionPlayerController.destructor(this);
+        this.boardController.destructor(this);
     }
 
     public FactionService getFactionService() {
